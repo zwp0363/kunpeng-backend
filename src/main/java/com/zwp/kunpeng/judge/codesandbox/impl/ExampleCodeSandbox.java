@@ -3,7 +3,7 @@ package com.zwp.kunpeng.judge.codesandbox.impl;
 import com.zwp.kunpeng.judge.codesandbox.CodeSandbox;
 import com.zwp.kunpeng.judge.codesandbox.model.ExecuteCodeRequest;
 import com.zwp.kunpeng.judge.codesandbox.model.ExecuteCodeResponse;
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
+import com.zwp.kunpeng.judge.codesandbox.model.JudgeInfo;
 import com.zwp.kunpeng.model.enums.JudgeInfoMessageEnum;
 import com.zwp.kunpeng.model.enums.QuestionSubmitStatusEnum;
 

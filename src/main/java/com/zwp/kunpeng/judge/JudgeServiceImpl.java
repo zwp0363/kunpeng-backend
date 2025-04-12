@@ -10,7 +10,7 @@ import com.zwp.kunpeng.judge.codesandbox.model.ExecuteCodeRequest;
 import com.zwp.kunpeng.judge.codesandbox.model.ExecuteCodeResponse;
 import com.zwp.kunpeng.judge.strategy.JudgeContext;
 import com.zwp.kunpeng.model.dto.question.JudgeCase;
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
+import com.zwp.kunpeng.judge.codesandbox.model.JudgeInfo;
 import com.zwp.kunpeng.model.entity.Question;
 import com.zwp.kunpeng.model.entity.QuestionSubmit;
 import com.zwp.kunpeng.model.enums.QuestionSubmitStatusEnum;

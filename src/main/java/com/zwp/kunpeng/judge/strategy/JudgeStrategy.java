@@ -1,6 +1,6 @@
 package com.zwp.kunpeng.judge.strategy;
 
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
+import com.zwp.kunpeng.judge.codesandbox.model.JudgeInfo;
 
 /**
  * 判题策略

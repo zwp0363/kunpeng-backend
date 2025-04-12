@@ -1,6 +1,5 @@
 package com.zwp.kunpeng.judge.codesandbox.model;
 
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

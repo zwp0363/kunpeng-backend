@@ -3,7 +3,7 @@ package com.zwp.kunpeng.judge.strategy;
 import cn.hutool.json.JSONUtil;
 import com.zwp.kunpeng.model.dto.question.JudgeCase;
 import com.zwp.kunpeng.model.dto.question.JudgeConfig;
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
+import com.zwp.kunpeng.judge.codesandbox.model.JudgeInfo;
 import com.zwp.kunpeng.model.entity.Question;
 import com.zwp.kunpeng.model.enums.JudgeInfoMessageEnum;
 

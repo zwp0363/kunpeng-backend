@@ -4,7 +4,7 @@ import com.zwp.kunpeng.judge.strategy.DefaultJudgeStrategy;
 import com.zwp.kunpeng.judge.strategy.JavaLanguageJudgeStrategy;
 import com.zwp.kunpeng.judge.strategy.JudgeContext;
 import com.zwp.kunpeng.judge.strategy.JudgeStrategy;
-import com.zwp.kunpeng.model.dto.questionsubmit.JudgeInfo;
+import com.zwp.kunpeng.judge.codesandbox.model.JudgeInfo;
 import com.zwp.kunpeng.model.entity.QuestionSubmit;
 import org.springframework.stereotype.Service;
 
