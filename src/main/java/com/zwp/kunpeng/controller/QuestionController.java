@@ -11,10 +11,15 @@ import com.zwp.kunpeng.constant.UserConstant;
 import com.zwp.kunpeng.exception.BusinessException;
 import com.zwp.kunpeng.exception.ThrowUtils;
 import com.zwp.kunpeng.model.dto.question.*;
+import com.zwp.kunpeng.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.zwp.kunpeng.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.zwp.kunpeng.model.entity.Question;
+import com.zwp.kunpeng.model.entity.QuestionSubmit;
 import com.zwp.kunpeng.model.entity.User;
+import com.zwp.kunpeng.model.vo.QuestionSubmitVO;
 import com.zwp.kunpeng.model.vo.QuestionVO;
 import com.zwp.kunpeng.service.QuestionService;
+import com.zwp.kunpeng.service.QuestionSubmitService;
 import com.zwp.kunpeng.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +45,9 @@ public class QuestionController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private QuestionSubmitService questionSubmitService;
 
     // region 增删改查
 
@@ -284,4 +292,43 @@ public class QuestionController {
         return ResultUtils.success(result);
     }
 
+    /**
+     * 提交题目
+     *
+     * @param questionSubmitAddRequest
+     * @param request
+     * @return 提交记录的 id
+     */
+    @PostMapping("/question_submit/do")
+    public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+                                               HttpServletRequest request) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 登录才能提交
+        final User loginUser = userService.getLoginUser(request);
+        long questionId = questionSubmitAddRequest.getQuestionId();
+        long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(questionSubmitId);
+    }
+
+    /**
+     * 分页获取题目提交列表（除了管理员外，普通用户只能看到非答案、提交代码等公开信息）
+     *
+     * @param questionSubmitQueryRequest
+     * @return
+     */
+    @PostMapping("/question_submit/list/page")
+    public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+                                                                         HttpServletRequest request) {
+        long current = questionSubmitQueryRequest.getCurrent();
+        long size = questionSubmitQueryRequest.getPageSize();
+        // 从数据库中查询原始的的题目提交分页信息
+        // 根据 questionSubmitQueryRequest 对象中定义的查询条件，从数据库中查询 QuestionSubmit 数据，并进行分页显示，即questionSubmitService.page(page, queryWrapper)
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        final User loginUser = userService.getLoginUser(request);
+        // 返回脱敏信息
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, loginUser));
+    }
 }

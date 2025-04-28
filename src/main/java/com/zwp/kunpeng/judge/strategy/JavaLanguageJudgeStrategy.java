@@ -8,6 +8,7 @@ import com.zwp.kunpeng.model.entity.Question;
 import com.zwp.kunpeng.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Java程序的判题策略
@@ -22,8 +23,8 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
     @Override
     public JudgeInfo doJudge(JudgeContext judgeContext) {
         JudgeInfo judgeInfo = judgeContext.getJudgeInfo();
-        Long memory = judgeInfo.getMemory();
-        Long time = judgeInfo.getTime();
+        Long memory = Optional.ofNullable(judgeInfo.getMemory()).orElse(0L);
+        Long time = Optional.ofNullable(judgeInfo.getTime()).orElse(0L);
         List<String> inputList = judgeContext.getInputList();
         List<String> outputList = judgeContext.getOutputList();
         Question question = judgeContext.getQuestion();
@@ -41,7 +42,10 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         // 依次判断每一项输出和预期输出是否相等
         for (int i = 0; i < judgeCaseList.size(); i++) {
             JudgeCase judgeCase = judgeCaseList.get(i);
-            if (!judgeCase.getOutput().equals(outputList.get(i))) {
+            // 处理输出前后的空白符,换行符
+            String expectedOutput = judgeCase.getOutput().trim();
+            String actualOutput = outputList.get(i).trim();
+            if (!expectedOutput.equals(actualOutput)) {
                 judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
                 judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
                 return judgeInfoResponse;

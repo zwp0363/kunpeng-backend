@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @from <a href="https://www.yuque.com/geqian-gtmrp/kskx4b">zwp知识库</a>
  */
 // todo 如需开启 Redis，须移除 exclude 中的内容
-@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
+@SpringBootApplication
 @MapperScan("com.zwp.kunpeng.mapper")
 @EnableScheduling
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)

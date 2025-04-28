@@ -167,7 +167,7 @@ PUT post_v1
 
 ```
 // 指定生成参数
-String packageName = "com.yupi.kunpeng";
+String packageName = "com.zwp.kunpeng";
 String dataName = "用户评论";
 String dataKey = "userComment";
 String upperDataKey = "UserComment";

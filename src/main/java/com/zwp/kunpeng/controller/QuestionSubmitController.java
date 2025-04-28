@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/question_submit")
 @Slf4j
+@Deprecated
 public class QuestionSubmitController {
 
     @Resource
@@ -38,7 +39,7 @@ public class QuestionSubmitController {
     private UserService userService;
 
     /**
-     * 提交/ 取消提交
+     * 提交题目
      *
      * @param questionSubmitAddRequest
      * @param request
